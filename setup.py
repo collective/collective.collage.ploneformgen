@@ -27,7 +27,7 @@ setup(name='collective.collage.ploneformgen',
       install_requires=[
           'setuptools',
           'Products.Collage',
-          'Products.PloneFormGen',
+          'Products.PloneFormGen>=1.5b2',
           # -*- Extra requirements: -*-
       ],
       )
