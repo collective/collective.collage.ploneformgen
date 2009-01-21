@@ -4,6 +4,7 @@ from zope import component
 from Products.PloneFormGen.browser.embedded import EmbeddedPFGView
 
 from Products.Collage.browser import helper
+from Products.Collage.browser import views
 from Products.Collage.viewmanager import mark_request
 from Products.Collage.interfaces import IDynamicViewManager
 
@@ -11,7 +12,7 @@ from Acquisition import aq_inner
 
 from ZPublisher.Publish import Retry
 
-class PloneFormGenView(EmbeddedPFGView):
+class PloneFormGenView(EmbeddedPFGView, views.BaseView):
     title = u"Standard"
 
     @property
@@ -24,7 +25,7 @@ class PloneFormGenView(EmbeddedPFGView):
 
     @property
     def helper(self):
-        return helper.CollageHelper(self.context, self.request)
+        return helper.CollageHelper(self.collage_context, self.request)
     
     @property
     def __call__(self):
