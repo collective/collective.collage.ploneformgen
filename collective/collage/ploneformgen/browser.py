@@ -38,7 +38,17 @@ class PloneFormGenView(EmbeddedPFGView, views.BaseView):
             # a retry-exception is raised in order for the thank-you
             # page to be rendered; we need to intercept this and do
             # our own rendering of this page
+            # and take care in case there's a virtual host monster request involved
+
             path_translated = self.request._orig_env['PATH_TRANSLATED']
+
+            if 'VirtualHostRoot' in path_translated:
+                # Eliminate /VirtualHostBase/ and /VirtualHostRoot parts
+                nodes = path_translated.replace('/VirtualHostBase/','').replace('/VirtualHostRoot','').split('/')
+                # Eliminates the protocol and server parts
+                nodes = nodes[2:]
+                path_translated = '/'.join(nodes)
+
             context = self.context.unrestrictedTraverse(path_translated)
             manager = IDynamicViewManager(context)
 
@@ -46,7 +56,7 @@ class PloneFormGenView(EmbeddedPFGView, views.BaseView):
             if not layout:
                 layout, title = manager.getDefaultLayout()
 
-            ifaces = mark_request(self.request)
+            ifaces = mark_request(self.context, self.request)
             view = component.getMultiAdapter((context, self.request), name=layout)
             interface.directlyProvides(self.request, ifaces)
             
