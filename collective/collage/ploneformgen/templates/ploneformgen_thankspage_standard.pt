@@ -24,9 +24,9 @@
   </p>
 
   <div tal:condition="exists:request/form/fieldset" tal:omit-tag="">
-      
+
     <p tal:replace="structure context/getThanksPrologue|nothing" />
-            
+
     <blockquote>
       <dl>
         <tal:block repeat="field python:context.displayInputs(request)">
@@ -35,9 +35,9 @@
         </tal:block>
       </dl>
     </blockquote>
-    
+
     <p tal:replace="structure context/getThanksEpilogue|nothing" />
 
   </div>
-    
+
 </tal:folder>

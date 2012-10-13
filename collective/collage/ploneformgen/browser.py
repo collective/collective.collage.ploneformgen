@@ -26,7 +26,7 @@ class PloneFormGenView(EmbeddedPFGView, views.BaseView):
     @property
     def helper(self):
         return helper.CollageHelper(self.collage_context, self.request)
-    
+
     @property
     def __call__(self):
         return self.index
@@ -59,5 +59,5 @@ class PloneFormGenView(EmbeddedPFGView, views.BaseView):
             ifaces = mark_request(self.context, self.request)
             view = component.getMultiAdapter((context, self.request), name=layout)
             interface.directlyProvides(self.request, ifaces)
-            
+
             return view()
