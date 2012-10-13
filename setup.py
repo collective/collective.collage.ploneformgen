@@ -3,11 +3,13 @@
 import os
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '0.1.dev0'
+changes = open('CHANGES.rst').read().strip()
 
 setup(name='collective.collage.ploneformgen',
       version=version,
       description="Add-on that allows displaying PloneFormGen-forms inside a Collage.",
+      long_description=changes,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
@@ -18,7 +20,7 @@ setup(name='collective.collage.ploneformgen',
       keywords='collage plone rss ploneformgen',
       author='Malthe Borch',
       author_email='mborch@gmail.com',
-      url='http://www.plone.org/products/collective.collage.ploneformgen',
+      url='https://github.com/collective/collective.collage.ploneformgen',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective', 'collective.collage'],
